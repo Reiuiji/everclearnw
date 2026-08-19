@@ -2,6 +2,8 @@
 
 A fan-made, 21+ parody website for a one-night room party inspired by (but not affiliated with) a certain beloved Seattle-area My Little Pony convention. It advertises Everclear-based cocktails, karaoke, and other room-party mischief. This is not a real convention, and it is not affiliated with, endorsed by, or sanctioned by Everfree Northwest, Pegasi Northwest, or Hasbro in any way, shape, or hoof.
 
+Theming is pony, furry, and Sylveon-friendly throughout, with a pastel-mode toggle on the About page for anypony whose eyes need a hug.
+
 ## File map
 
 ```

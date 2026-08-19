@@ -48,6 +48,81 @@
   }
 
   // ---------------------------------------------------------------------
+  // Pastel theme engine
+  // ---------------------------------------------------------------------
+
+  var THEME_STORAGE_KEY = "ecnw-theme";
+  var PASTEL_CLASS = "ecnw-pastel";
+
+  function getStoredTheme() {
+    try {
+      return window.localStorage.getItem(THEME_STORAGE_KEY);
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function storeTheme(name) {
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, name);
+    } catch (err) {
+      // Ignore — worst case the choice doesn't persist to the next page.
+    }
+  }
+
+  function currentTheme() {
+    return root.classList.contains(PASTEL_CLASS) ? "pastel" : "night";
+  }
+
+  function applyThemeClass(name) {
+    if (name === "pastel") {
+      root.classList.add(PASTEL_CLASS);
+    } else {
+      root.classList.remove(PASTEL_CLASS);
+    }
+  }
+
+  function themeToggleLabel(name) {
+    return name === "pastel"
+      ? "🌙 Back to Night Mode" // 🌙
+      : "🌸 Switch to Pastel Mode"; // 🌸
+  }
+
+  function updateThemeToggleButtons() {
+    var buttons = document.querySelectorAll("[data-ecnw-theme-toggle]");
+    var label = themeToggleLabel(currentTheme());
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].textContent = label;
+    }
+  }
+
+  function setTheme(name) {
+    var normalized = name === "pastel" ? "pastel" : "night";
+    applyThemeClass(normalized);
+    storeTheme(normalized);
+    safe(updateThemeToggleButtons, "theme toggle label update");
+  }
+
+  function initThemeFromStorage() {
+    var stored = getStoredTheme();
+    applyThemeClass(stored === "pastel" ? "pastel" : "night");
+  }
+
+  function initThemeToggleButtons() {
+    var buttons = document.querySelectorAll("[data-ecnw-theme-toggle]");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener("click", function () {
+        setTheme(currentTheme() === "pastel" ? "night" : "pastel");
+      });
+    }
+    updateThemeToggleButtons();
+  }
+
+  // Applied as early as possible (module load, ahead of DOMContentLoaded)
+  // so the stored theme sticks with minimal flash across page navigations.
+  safe(initThemeFromStorage, "theme init from storage");
+
+  // ---------------------------------------------------------------------
   // Confetti
   // ---------------------------------------------------------------------
 
@@ -189,7 +264,18 @@
   // Pony rain (logo easter egg + Konami code)
   // ---------------------------------------------------------------------
 
-  var PONY_EMOJI = ["🦄", "🌈", "🍹", "💜", "⭐"]; // 🦄🌈🍹💜⭐
+  var PONY_EMOJI = [
+    "🦄",
+    "🌈",
+    "🍹",
+    "💜",
+    "⭐",
+    "🦊",
+    "🐺",
+    "🐾",
+    "🎀",
+    "💖",
+  ]; // 🦄🌈🍹💜⭐🦊🐺🐾🎀💖
   var ponyRainActive = false;
 
   function ponyRainReduced() {
@@ -361,6 +447,10 @@
     "May contain traces of rainbow.",
     "Ask us about our friendship bracelets.",
     "The floor is lava. The lava is also glitter.",
+    "Ponies, furries, and one very smug Sylveon welcome.",
+    "Tail-friendly seating available.",
+    "Fursuiters hydrate too — water bowls provided.",
+    "Sylveon says: emotions are just vibes with ribbons.",
   ];
 
   function initFooterVibeLine() {
@@ -380,8 +470,10 @@
   window.ecnwParty = window.ecnwParty || {};
   window.ecnwParty.confetti = confetti;
   window.ecnwParty.ponyRain = ponyRain;
+  window.ecnwParty.setTheme = setTheme;
 
   onReady(function () {
+    safe(initThemeToggleButtons, "theme toggle buttons init");
     safe(initAgeGateCelebration, "age-gate celebration init");
     safe(initLogoEasterEgg, "logo easter egg init");
     safe(initKonamiCode, "konami code init");

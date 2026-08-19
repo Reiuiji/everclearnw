@@ -57,7 +57,15 @@
     'A party favor gets immediately lost',
     'Someone breaks into applause for no reason',
     'A group singalong starts without warning',
-    'Somepony asks who is DJing tonight'
+    'Somepony asks who is DJing tonight',
+    'A fursuiter high-fives every single pony in the room',
+    "Somepony declares 'Sylveon is best pony' (technically wrong, spiritually correct)",
+    'A tail gets sat on (the owner forgives)',
+    'Fursuit head comes off, reveals immaculate hair somehow',
+    'A pony and a Pokémon trade lore for 10+ minutes',
+    "Someone's fursona and ponysona are revealed to be the same guy",
+    'Ribbon-count of a passing Sylveon cosplayer gets audited',
+    'Paws are declared unfit for beer pong (ruling stands)'
   ];
 
   var board = document.getElementById('bingo-board');

@@ -22,6 +22,7 @@
        ----------------------------------------------------------------- */
 
     .bingo-wrap {
+      width: 100%;
       max-width: 480px;
       margin-inline: auto;
     }
@@ -36,7 +37,9 @@
 
     .bingo-board {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      width: 100%;
+      max-width: 100%;
       gap: 0.4rem;
       background: var(--ecnw-bg-alt);
       border: 1px solid var(--ecnw-border-soft);
@@ -47,6 +50,9 @@
 
     .bingo-cell {
       aspect-ratio: 1 / 1;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -54,7 +60,7 @@
       padding: 0.35rem;
       font-family: var(--ecnw-font-body);
       font-weight: 700;
-      font-size: clamp(0.55rem, 2.5vw, 0.72rem);
+      font-size: clamp(0.5rem, 2.4vw, 0.72rem);
       line-height: 1.15;
       color: var(--ecnw-cream-dim);
       background: var(--ecnw-bg-raised);
@@ -64,6 +70,15 @@
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
       transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+    }
+
+    .bingo-cell-text {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      hyphens: auto;
     }
 
     .bingo-cell:hover {

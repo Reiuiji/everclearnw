@@ -26,13 +26,13 @@
       label: "Snack Break 🥨",
       short: "Snacks 🥨",
       type: "snack",
-      pun: "The Wheel decrees: go eat something. This is not optional, it's delicious."
+      pun: "The Wheel decrees: go eat something. Ponies, furries, and fairy-types alike run better on snacks."
     },
     {
       label: "WATER 💧",
       short: "💧",
       type: "water",
-      pun: "The Wheel has spoken. Hydration is the truest magic."
+      pun: "Hydration: canonically effective on ponies, furries, and fairy-types alike."
     },
     {
       label: "Sonic Rainboom",
@@ -53,10 +53,10 @@
       pun: "So gentle the Wheel almost didn't want to interrupt your evening."
     },
     {
-      label: "Foal-Friendly Mocktail 🦄",
-      short: "Mocktail 🦄",
+      label: "Sylveon Special 🎀 (zero-proof)",
+      short: "Sylveon 🎀",
       type: "mocktail",
-      pun: "All the sparkle, zero regret. The Wheel salutes the Designated Sylveon."
+      pun: "Zero proof, maximum affection ribbons. The Wheel channels its inner Fairy-type for this one."
     },
     {
       label: "Twilight Sparkler",
@@ -98,7 +98,7 @@
       label: "Apple Jack & Ginger",
       short: "Applejack 🍏",
       type: "cocktail",
-      pun: "Honest, hardworking, and sneaks up on you exactly like she warned."
+      pun: "Honest, hardworking, and sneaks up on you exactly like she warned — ponies and furries report the identical experience."
     },
     {
       label: "Luna's Moonlit Lemonade",
