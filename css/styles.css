@@ -1,0 +1,569 @@
+/* =========================================================================
+   Everclear Northwest — site stylesheet
+   A loving 21+ parody of a certain Seattle pony convention.
+   Dark night-party theme: deep purple/near-black + neon green + hot pink.
+   ========================================================================= */
+
+:root {
+  /* Palette */
+  --ecnw-bg: #14091f;
+  --ecnw-bg-alt: #1e0f2e;
+  --ecnw-bg-raised: #271640;
+  --ecnw-bg-raised-hover: #33205280;
+  --ecnw-border: #3c2a5c;
+  --ecnw-border-soft: #2a1a44;
+
+  --ecnw-green: #39ff8f;
+  --ecnw-green-dim: #21b869;
+  --ecnw-green-glow: rgba(57, 255, 143, 0.35);
+
+  --ecnw-pink: #ff4fd8;
+  --ecnw-pink-dim: #d92eb3;
+  --ecnw-pink-glow: rgba(255, 79, 216, 0.35);
+
+  --ecnw-cream: #fbf3e7;
+  --ecnw-cream-dim: #d9c9e6;
+  --ecnw-cream-faint: #b8a6cb;
+
+  --ecnw-warn-bg: #3a0f14;
+  --ecnw-warn-border: #ff4f6d;
+  --ecnw-warn-text: #ffd0d9;
+
+  /* Type */
+  --ecnw-font-heading: "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+  --ecnw-font-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Layout */
+  --ecnw-max-width: 1100px;
+  --ecnw-radius: 16px;
+  --ecnw-radius-sm: 10px;
+  --ecnw-radius-lg: 24px;
+  --ecnw-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --ecnw-header-h: 68px;
+}
+
+/* -------------------------------------------------------------------------
+   Reset / base
+   ------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ecnw-bg);
+  color: var(--ecnw-cream);
+  font-family: var(--ecnw-font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(57, 255, 143, 0.08), transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(255, 79, 216, 0.08), transparent 45%);
+  background-attachment: fixed;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--ecnw-font-heading);
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+  color: var(--ecnw-cream);
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+ul,
+ol {
+  margin: 0 0 1em;
+  padding-left: 1.3em;
+}
+
+a {
+  color: var(--ecnw-green);
+  text-decoration-color: var(--ecnw-green-glow);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--ecnw-pink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--ecnw-green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--ecnw-pink);
+  color: var(--ecnw-bg);
+}
+
+/* -------------------------------------------------------------------------
+   Layout helpers
+   ------------------------------------------------------------------------- */
+
+.container {
+  max-width: var(--ecnw-max-width);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* -------------------------------------------------------------------------
+   Header / nav
+   ------------------------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  min-height: var(--ecnw-header-h);
+  display: flex;
+  align-items: center;
+  background: rgba(20, 9, 31, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ecnw-border-soft);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-block: 0.75rem;
+  width: 100%;
+}
+
+.logo {
+  font-family: var(--ecnw-font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ecnw-cream);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.logo:hover {
+  color: var(--ecnw-green);
+}
+
+.logo .logo-accent {
+  color: var(--ecnw-green);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  color: var(--ecnw-cream-dim);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.site-nav a:hover {
+  color: var(--ecnw-bg);
+  background: var(--ecnw-green);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--ecnw-bg);
+  background: var(--ecnw-pink);
+}
+
+/* -------------------------------------------------------------------------
+   Hero
+   ------------------------------------------------------------------------- */
+
+.hero {
+  text-align: center;
+  padding-block: clamp(3rem, 8vw, 6rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  margin-bottom: 0.35em;
+  text-shadow: 0 0 24px var(--ecnw-green-glow);
+}
+
+.hero-title .accent {
+  color: var(--ecnw-green);
+}
+
+.hero-sub {
+  font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+  color: var(--ecnw-cream-dim);
+  max-width: 640px;
+  margin: 0 auto 1.5em;
+}
+
+.tagline {
+  display: inline-block;
+  font-family: var(--ecnw-font-heading);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--ecnw-pink);
+  letter-spacing: 0.03em;
+  margin-bottom: 1em;
+}
+
+/* -------------------------------------------------------------------------
+   Buttons
+   ------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  font-family: var(--ecnw-font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.75em 1.6em;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.2;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease, color 0.12s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: var(--ecnw-green);
+  color: var(--ecnw-bg);
+  box-shadow: 0 6px 20px var(--ecnw-green-glow);
+}
+
+.btn-primary:hover {
+  background: var(--ecnw-cream);
+  color: var(--ecnw-bg);
+  box-shadow: 0 10px 26px var(--ecnw-green-glow);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ecnw-cream);
+  border-color: var(--ecnw-border);
+}
+
+.btn-ghost:hover {
+  border-color: var(--ecnw-pink);
+  color: var(--ecnw-pink);
+}
+
+/* -------------------------------------------------------------------------
+   Sections
+   ------------------------------------------------------------------------- */
+
+.section {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-align: center;
+  margin-bottom: 0.9em;
+}
+
+.section-title .accent {
+  color: var(--ecnw-pink);
+}
+
+/* -------------------------------------------------------------------------
+   Cards
+   ------------------------------------------------------------------------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--ecnw-bg-alt);
+  border: 1px solid var(--ecnw-border-soft);
+  border-radius: var(--ecnw-radius);
+  padding: 1.5rem;
+  box-shadow: var(--ecnw-shadow);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--ecnw-green);
+  transform: translateY(-3px);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: var(--ecnw-green);
+  margin-bottom: 0.4em;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Badges
+   ------------------------------------------------------------------------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-family: var(--ecnw-font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.3em 0.8em;
+  border-radius: 999px;
+  background: var(--ecnw-bg-raised);
+  color: var(--ecnw-green);
+  border: 1px solid var(--ecnw-green-dim);
+}
+
+.badge-strong {
+  background: var(--ecnw-warn-bg);
+  color: var(--ecnw-warn-text);
+  border-color: var(--ecnw-warn-border);
+  box-shadow: 0 0 14px rgba(255, 79, 109, 0.25);
+}
+
+/* -------------------------------------------------------------------------
+   Tables
+   ------------------------------------------------------------------------- */
+
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--ecnw-radius);
+  border: 1px solid var(--ecnw-border-soft);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+  background: var(--ecnw-bg-alt);
+}
+
+.table caption {
+  caption-side: top;
+  text-align: left;
+  font-family: var(--ecnw-font-heading);
+  padding: 0.75rem 1rem;
+  color: var(--ecnw-cream-dim);
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--ecnw-border-soft);
+  font-size: 0.95rem;
+}
+
+.table thead th {
+  font-family: var(--ecnw-font-heading);
+  color: var(--ecnw-bg);
+  background: var(--ecnw-green);
+  white-space: nowrap;
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 79, 216, 0.06);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* -------------------------------------------------------------------------
+   Disclaimer callout
+   ------------------------------------------------------------------------- */
+
+.disclaimer {
+  background: var(--ecnw-warn-bg);
+  border: 1px solid var(--ecnw-warn-border);
+  border-left-width: 6px;
+  border-radius: var(--ecnw-radius-sm);
+  padding: 1.25rem 1.5rem;
+  color: var(--ecnw-warn-text);
+  margin-block: 1.5rem;
+}
+
+.disclaimer strong,
+.disclaimer b {
+  color: var(--ecnw-cream);
+}
+
+.disclaimer :last-child {
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--ecnw-border-soft);
+  padding-block: 2rem;
+  margin-top: 3rem;
+  color: var(--ecnw-cream-faint);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.site-footer a {
+  color: var(--ecnw-cream-faint);
+}
+
+.site-footer a:hover {
+  color: var(--ecnw-green);
+}
+
+.site-footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+
+/* =========================================================================
+   Age gate
+   ========================================================================= */
+
+html.ecnw-lock,
+html.ecnw-lock body {
+  overflow: hidden;
+  height: 100%;
+}
+
+.age-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(10, 4, 17, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: ecnw-fade-in 0.25s ease both;
+}
+
+@keyframes ecnw-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.age-gate-panel {
+  width: min(480px, 100%);
+  background: linear-gradient(160deg, var(--ecnw-bg-raised), var(--ecnw-bg-alt));
+  border: 1px solid var(--ecnw-border);
+  border-radius: var(--ecnw-radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(57, 255, 143, 0.08);
+}
+
+.age-gate-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.25em;
+}
+
+.age-gate-panel h2 {
+  font-size: clamp(1.35rem, 4vw, 1.75rem);
+  margin-bottom: 0.5em;
+}
+
+.age-gate-panel p {
+  color: var(--ecnw-cream-dim);
+  margin-bottom: 1.5em;
+}
+
+.age-gate-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.age-gate-actions .btn {
+  width: 100%;
+}
+
+.age-gate-fineprint {
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--ecnw-cream-faint);
+}
+
+.age-gate-fineprint p {
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Responsive tweaks
+   ------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .site-header .container {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .site-nav {
+    justify-content: center;
+    width: 100%;
+  }
+}
