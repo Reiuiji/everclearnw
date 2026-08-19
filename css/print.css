@@ -1,0 +1,158 @@
+/* =========================================================================
+   Everclear Northwest — QR poster sheet styles
+   Loaded only by qr.html. Screen styles for the on-page poster preview,
+   plus @media print rules for the actual printable posters.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   Screen: slim staff header
+   ------------------------------------------------------------------------- */
+
+.qr-header .site-nav a {
+  font-weight: 700;
+}
+
+.qr-intro {
+  text-align: center;
+  padding-block: clamp(2rem, 6vw, 3.5rem) 1.5rem;
+}
+
+.qr-intro .btn {
+  margin-top: 1rem;
+}
+
+/* -------------------------------------------------------------------------
+   Screen: poster grid + poster card
+   ------------------------------------------------------------------------- */
+
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.poster {
+  background: var(--ecnw-bg-alt);
+  border: 1px solid var(--ecnw-border-soft);
+  border-radius: var(--ecnw-radius);
+  box-shadow: var(--ecnw-shadow);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+}
+
+.poster-headline {
+  font-size: 1.3rem;
+  color: var(--ecnw-green);
+  margin-bottom: 0.75em;
+}
+
+.poster-qr {
+  background: #ffffff;
+  border-radius: var(--ecnw-radius-sm);
+  padding: 1rem;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.poster-qr img {
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+}
+
+.poster-url {
+  font-family: var(--ecnw-font-heading);
+  color: var(--ecnw-cream);
+  font-weight: 700;
+  margin-bottom: 0.4em;
+  word-break: break-word;
+}
+
+.poster-fineprint {
+  font-size: 0.75rem;
+  color: var(--ecnw-cream-faint);
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Print: posters only, one per page, ink-friendly
+   ------------------------------------------------------------------------- */
+
+@media print {
+  .age-gate {
+    display: none !important;
+  }
+
+  .site-header,
+  .site-footer,
+  .qr-intro,
+  .btn {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #000000 !important;
+  }
+
+  main {
+    margin: 0;
+  }
+
+  .qr-posters .container {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .poster-grid {
+    display: block;
+  }
+
+  .poster {
+    background: #ffffff !important;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 1cm;
+    page-break-after: always;
+    break-after: page;
+    text-align: center;
+  }
+
+  .poster:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .poster-headline {
+    color: #000000 !important;
+    font-size: 42pt;
+    line-height: 1.15;
+    margin-bottom: 0.6em;
+  }
+
+  .poster-qr {
+    background: #ffffff !important;
+    border: 2px solid #000000;
+    padding: 0.5cm;
+  }
+
+  .poster-qr img {
+    width: 12cm;
+    height: 12cm;
+    max-width: 100%;
+  }
+
+  .poster-url {
+    color: #000000 !important;
+    font-size: 20pt;
+  }
+
+  .poster-fineprint {
+    color: #333333 !important;
+    font-size: 12pt;
+  }
+}

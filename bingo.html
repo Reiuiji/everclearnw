@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pony Party Bingo — Everclear Northwest</title>
+  <meta name="description" content="Play Pony Party Bingo at Everclear Northwest. Spot the moment, tap the square, get five in a row for eternal glory — August 22, 2026.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/party.css">
+  <script src="js/agegate.js" defer></script>
+  <script src="js/party.js" defer></script>
+  <script src="js/bingo.js" defer></script>
+
+  <style>
+    /* -----------------------------------------------------------------
+       Pony Party Bingo — page-specific styles (bingo.html only)
+       ----------------------------------------------------------------- */
+
+    .bingo-wrap {
+      max-width: 480px;
+      margin-inline: auto;
+    }
+
+    .bingo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .bingo-board {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.4rem;
+      background: var(--ecnw-bg-alt);
+      border: 1px solid var(--ecnw-border-soft);
+      border-radius: var(--ecnw-radius);
+      padding: 0.5rem;
+      box-shadow: var(--ecnw-shadow);
+    }
+
+    .bingo-cell {
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.35rem;
+      font-family: var(--ecnw-font-body);
+      font-weight: 700;
+      font-size: clamp(0.55rem, 2.5vw, 0.72rem);
+      line-height: 1.15;
+      color: var(--ecnw-cream-dim);
+      background: var(--ecnw-bg-raised);
+      border: 1px solid var(--ecnw-border);
+      border-radius: var(--ecnw-radius-sm);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+    }
+
+    .bingo-cell:hover {
+      border-color: var(--ecnw-pink);
+    }
+
+    .bingo-cell:active {
+      transform: scale(0.96);
+    }
+
+    .bingo-cell.is-marked {
+      background: var(--ecnw-green);
+      border-color: var(--ecnw-green);
+      color: var(--ecnw-bg);
+      box-shadow: 0 0 14px var(--ecnw-green-glow);
+    }
+
+    .bingo-cell.is-free {
+      background: var(--ecnw-pink);
+      border-color: var(--ecnw-pink);
+      color: var(--ecnw-bg);
+      font-family: var(--ecnw-font-heading);
+      font-weight: 700;
+      cursor: default;
+      box-shadow: 0 0 14px var(--ecnw-pink-glow);
+    }
+
+    .bingo-cell.is-pop {
+      animation: ecnw-bingo-pop 0.3s ease;
+    }
+
+    @keyframes ecnw-bingo-pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+      100% { transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bingo-cell {
+        transition: none;
+      }
+      .bingo-cell.is-pop {
+        animation: none;
+      }
+    }
+
+    .bingo-instructions {
+      margin-top: 2rem;
+      background: var(--ecnw-bg-alt);
+      border: 1px solid var(--ecnw-border-soft);
+      border-radius: var(--ecnw-radius);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .bingo-instructions h2 {
+      font-size: 1.15rem;
+      color: var(--ecnw-green);
+    }
+
+    .bingo-instructions p:last-child {
+      margin-bottom: 0;
+    }
+
+    .bingo-banner {
+      position: fixed;
+      top: calc(var(--ecnw-header-h) + 1rem);
+      left: 50%;
+      transform: translate(-50%, -16px);
+      z-index: 600;
+      font-family: var(--ecnw-font-heading);
+      font-size: clamp(1.1rem, 5vw, 1.6rem);
+      font-weight: 700;
+      color: var(--ecnw-bg);
+      background: var(--ecnw-green);
+      padding: 0.75em 1.4em;
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 24px var(--ecnw-green-glow);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .bingo-banner.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bingo-banner {
+        transition: opacity 0.2s ease;
+      }
+      .bingo-banner.is-visible {
+        transform: translate(-50%, 0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bingo-banner" id="bingo-banner" role="status" aria-live="polite">🎉 BINGO! 🎉</div>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">🍹 Everclear NW</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="drinks.html">Drinks</a>
+        <a href="events.html">Events</a>
+        <a href="games.html" aria-current="page">Games</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">Pony Party Bingo 🎉</h1>
+        <p class="hero-sub">Spotted it? Tap it. Five in a row wins eternal glory and exactly one (1) high-hoof.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container bingo-wrap">
+
+        <div class="bingo-controls">
+          <button type="button" class="btn btn-ghost" id="bingo-new-card">🔄 New Card</button>
+        </div>
+
+        <div class="bingo-board" id="bingo-board" role="group" aria-label="Pony Party Bingo card"></div>
+
+        <div class="bingo-instructions">
+          <h2>How to Play</h2>
+          <p>Keep this page open on your phone. When you spot a square happening around you, tap it to mark it. The center square is free — you already showed up, that counts for something.</p>
+          <p>Get five marked squares in a row — across, down, or diagonal — for a full BINGO! Your card is saved to this device, so you can close the tab and come back without losing progress. Tap "New Card" for a fresh shuffle at any time.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; Party Ponies Northwest, est. last Tuesday</p>
+      <p>Everclear Northwest is a fan-made parody site and private room party. Not affiliated with Everfree Northwest, Pegasi Northwest, or Hasbro. My Little Pony is a trademark of Hasbro.</p>
+      <p>21+ only. Pace yourself, drink water, eat something, and look out for your friends. Never let anypony drink and drive.</p>
+      <p>Made with Love by Reiuiji 2026.<br>EverClearNW | V1.0.0 (fa4dd75)</p>
+    </div>
+  </footer>
+
+</body>
+</html>

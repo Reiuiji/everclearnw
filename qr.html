@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Poster Sheet — Everclear Northwest</title>
+  <meta name="description" content="Staff printable QR poster sheet for Everclear Northwest — six posters linking to the site's pages, ready to tape up around the party.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/party.css">
+  <link rel="stylesheet" href="css/print.css">
+  <script src="js/agegate.js" defer></script>
+  <script src="js/party.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header qr-header">
+    <div class="container">
+      <a class="logo" href="index.html">🍹 Everclear NW</a>
+      <nav class="site-nav">
+        <a href="games.html">&larr; Back to Games</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="section qr-intro">
+      <div class="container">
+        <h1 class="hero-title" style="font-size: clamp(1.8rem, 5vw, 2.8rem);">🖨️ QR Poster Sheet</h1>
+        <p class="hero-sub">Print this page. Tape the posters where ponies congregate. Watch the magic.</p>
+        <button type="button" class="btn btn-primary" onclick="window.print()">🖨️ Print Posters</button>
+      </div>
+    </section>
+
+    <section class="section qr-posters">
+      <div class="container">
+        <div class="poster-grid">
+
+          <article class="poster">
+            <h2 class="poster-headline">You found a QR code! This is the main one</h2>
+            <div class="poster-qr">
+              <img src="assets/qr/home.svg" alt="QR code to the Everclear Northwest homepage">
+            </div>
+            <p class="poster-url">everclear-nw.com</p>
+            <p class="poster-fineprint">Everclear Northwest &middot; 21+ room party &middot; Aug 22 &middot; parody site</p>
+          </article>
+
+          <article class="poster">
+            <h2 class="poster-headline">THIRSTY? 🍹 The Mane Menu awaits</h2>
+            <div class="poster-qr">
+              <img src="assets/qr/drinks.svg" alt="QR code to the Everclear Northwest drink menu">
+            </div>
+            <p class="poster-url">everclear-nw.com/drinks.html</p>
+            <p class="poster-fineprint">Everclear Northwest &middot; 21+ room party &middot; Aug 22 &middot; parody site</p>
+          </article>
+
+          <article class="poster">
+            <h2 class="poster-headline">LOST? So is everypony. Here's the schedule</h2>
+            <div class="poster-qr">
+              <img src="assets/qr/events.svg" alt="QR code to the Everclear Northwest events schedule">
+            </div>
+            <p class="poster-url">everclear-nw.com/events.html</p>
+            <p class="poster-fineprint">Everclear Northwest &middot; 21+ room party &middot; Aug 22 &middot; parody site</p>
+          </article>
+
+          <article class="poster">
+            <h2 class="poster-headline">BORED? Impossible. But just in case&hellip;</h2>
+            <div class="poster-qr">
+              <img src="assets/qr/games.svg" alt="QR code to the Everclear Northwest games hub">
+            </div>
+            <p class="poster-url">everclear-nw.com/games.html</p>
+            <p class="poster-fineprint">Everclear Northwest &middot; 21+ room party &middot; Aug 22 &middot; parody site</p>
+          </article>
+
+          <article class="poster">
+            <h2 class="poster-headline">BINGO, but make it pony</h2>
+            <div class="poster-qr">
+              <img src="assets/qr/bingo.svg" alt="QR code to Pony Party Bingo">
+            </div>
+            <p class="poster-url">everclear-nw.com/bingo.html</p>
+            <p class="poster-fineprint">Everclear Northwest &middot; 21+ room party &middot; Aug 22 &middot; parody site</p>
+          </article>
+
+          <article class="poster">
+            <h2 class="poster-headline">Can't decide? Spin the Wheel</h2>
+            <div class="poster-qr">
+              <img src="assets/qr/wheel.svg" alt="QR code to the Wheel of Friendship">
+            </div>
+            <p class="poster-url">everclear-nw.com/wheel.html</p>
+            <p class="poster-fineprint">Everclear Northwest &middot; 21+ room party &middot; Aug 22 &middot; parody site</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; Party Ponies Northwest, est. last Tuesday</p>
+      <p>Everclear Northwest is a fan-made parody site and private room party. Not affiliated with Everfree Northwest, Pegasi Northwest, or Hasbro. My Little Pony is a trademark of Hasbro.</p>
+      <p>21+ only. Pace yourself, drink water, eat something, and look out for your friends. Never let anypony drink and drive.</p>
+      <p>Made with Love by Reiuiji 2026.<br>EverClearNW | V1.0.0 (fa4dd75)</p>
+    </div>
+  </footer>
+
+</body>
+</html>

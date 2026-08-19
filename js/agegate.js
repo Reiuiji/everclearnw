@@ -73,6 +73,7 @@
     enterBtn.addEventListener("click", function () {
       rememberAge();
       removeAgeGate(overlay);
+      document.dispatchEvent(new CustomEvent("ecnw:age-verified"));
     });
 
     var leaveBtn = document.createElement("button");

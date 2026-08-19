@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wheel of Friendship — Everclear Northwest</title>
+  <meta name="description" content="Can't decide what's next? Spin the Wheel of Friendship for a randomly-suggested Everclear Northwest cocktail, mocktail, snack break, or water. 21+ only.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/party.css">
+  <script src="js/agegate.js" defer></script>
+  <script src="js/party.js" defer></script>
+  <script src="js/wheel.js" defer></script>
+
+  <style>
+    .wheel-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .wheel-wrap {
+      position: relative;
+      width: min(85vw, 420px);
+      max-width: 420px;
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-top: 28px solid var(--ecnw-pink);
+      filter: drop-shadow(0 4px 10px var(--ecnw-pink-glow));
+      z-index: 3;
+    }
+
+    .wheel-disc {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 4px solid var(--ecnw-border);
+      background: var(--ecnw-bg-alt);
+      box-shadow: var(--ecnw-shadow);
+      padding: 0;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .wheel-disc:hover {
+      border-color: var(--ecnw-green);
+    }
+
+    .wheel-disc:focus-visible {
+      outline: 3px solid var(--ecnw-green);
+      outline-offset: 4px;
+    }
+
+    .wheel-disc:disabled {
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+
+    .wheel-mount {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .wheel-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+    }
+
+    .wheel-label {
+      font-family: var(--ecnw-font-body);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .wheel-hub-icon {
+      font-size: 26px;
+    }
+
+    .spin-btn {
+      font-size: 1.25rem;
+      padding: 16px 48px;
+      min-height: 56px;
+      min-width: 220px;
+    }
+
+    .spin-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .result-card {
+      width: min(85vw, 420px);
+      max-width: 420px;
+      background: var(--ecnw-bg-raised);
+      border: 1px solid var(--ecnw-border);
+      border-radius: var(--ecnw-radius);
+      box-shadow: var(--ecnw-shadow);
+      padding: 24px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .result-card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .result-eyebrow {
+      font-family: var(--ecnw-font-heading);
+      color: var(--ecnw-cream-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      margin: 0 0 8px;
+    }
+
+    .result-title {
+      font-family: var(--ecnw-font-heading);
+      color: var(--ecnw-green);
+      font-size: 1.6rem;
+      margin: 0 0 12px;
+    }
+
+    .result-pun {
+      color: var(--ecnw-cream-dim);
+      margin: 0 0 16px;
+    }
+
+    .result-link {
+      display: inline-block;
+    }
+
+    @media (max-width: 420px) {
+      .wheel-label {
+        font-size: 11px;
+      }
+
+      .spin-btn {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">🍹 Everclear NW</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="drinks.html">Drinks</a>
+        <a href="events.html">Events</a>
+        <a href="games.html" aria-current="page">Games</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">The Wheel of Friendship 🎡</h1>
+        <p class="hero-sub">Can't decide what's next? Let the magic of probability decide for you.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container wheel-section">
+
+        <div class="wheel-wrap">
+          <div class="wheel-pointer" aria-hidden="true"></div>
+          <button type="button" id="wheelBtn" class="wheel-disc" aria-label="Spin the Wheel of Friendship">
+            <span id="wheelMount" class="wheel-mount"></span>
+          </button>
+        </div>
+
+        <button type="button" id="spinBtn" class="btn btn-primary spin-btn">SPIN</button>
+
+        <div id="resultCard" class="result-card" aria-live="polite" hidden>
+          <p class="result-eyebrow">The Wheel Has Spoken</p>
+          <h2 id="resultTitle" class="result-title"></h2>
+          <p id="resultPun" class="result-pun"></p>
+          <a id="resultLink" class="btn btn-ghost result-link" href="drinks.html" hidden>Recipe on the Mane Menu →</a>
+        </div>
+
+        <div class="disclaimer">
+          <p>The Wheel suggests. You decide. The Wheel also loves suggesting water — the Wheel is wise. One spin per decision; the Wheel does not do double-or-nothing.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; Party Ponies Northwest, est. last Tuesday</p>
+      <p>Everclear Northwest is a fan-made parody site and private room party. Not affiliated with Everfree Northwest, Pegasi Northwest, or Hasbro. My Little Pony is a trademark of Hasbro.</p>
+      <p>21+ only. Pace yourself, drink water, eat something, and look out for your friends. Never let anypony drink and drive.</p>
+      <p>Made with Love by Reiuiji 2026.<br>EverClearNW | V1.0.0 (fa4dd75)</p>
+    </div>
+  </footer>
+
+</body>
+</html>
