@@ -59,3 +59,7 @@ The age gate (`js/agegate.js`) is an honor-system check backed by `localStorage`
 ## Drink responsibly
 
 This site is a joke about a fictional room party. If you're at a real one: pace yourself, drink water, eat something, look out for your friends, and never drink and drive.
+
+## Footer version stamp
+
+Each page's footer shows the deployed commit: the HTML files carry empty Jekyll front matter (`---`/`---`) so GitHub Pages' built-in Jekyll pass processes them and substitutes `{{ site.github.build_revision | slice: 0, 7 }}` with the short SHA of the commit being deployed. It updates automatically on every push. When previewing locally with a plain HTTP server, you'll see the raw template tag instead of a SHA — that's expected.
