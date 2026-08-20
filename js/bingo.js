@@ -274,14 +274,16 @@
     if (!span) return;
 
     var style = window.getComputedStyle(btn);
-    var padX = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
     var padY = (parseFloat(style.paddingTop) || 0) + (parseFloat(style.paddingBottom) || 0);
-    var availWidth = btn.clientWidth - padX;
     var availHeight = btn.clientHeight - padY;
 
     function fits(size) {
       btn.style.fontSize = size + 'px';
-      return span.scrollWidth <= availWidth && span.scrollHeight <= availHeight;
+      // scrollWidth/scrollHeight round up while the available box can be
+      // fractional, so compare the span against its own client box for
+      // width and allow 1px of slack for height — otherwise every size
+      // reads as overflowing and the search collapses to MIN_FONT_PX.
+      return span.scrollWidth <= span.clientWidth && span.scrollHeight <= availHeight + 1;
     }
 
     var lo = MIN_FONT_PX;
