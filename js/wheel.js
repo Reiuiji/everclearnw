@@ -57,8 +57,8 @@
       pun: "So gentle the Wheel almost didn't want to interrupt your evening."
     },
     {
-      label: "Foal-Friendly 🦄 (zero-proof)",
-      short: "Foal-Friendly 🦄",
+      label: "Sweet Kiss 💋 (zero-proof)",
+      short: "Sweet Kiss 💋",
       type: "mocktail",
       pun: "Zero proof, maximum affection ribbons. The Wheel salutes the Designated Sylveon."
     },
