@@ -114,7 +114,7 @@
 }
 
 /* =========================================================================
-   Pastel theme
+   Pastel theme — Sylveon color scheme
    Toggled via window.ecnwParty.setTheme("pastel" | "night"), which adds
    or removes html.ecnw-pastel. Every rule below is scoped under that
    class, so the default night theme in css/styles.css stays byte-identical
@@ -123,33 +123,43 @@
    file (site header bar, hero background glow, badge/table/age-gate
    accents) are also overridden here so pastel mode reads as intentional
    rather than broken, per component.
+
+   Palette reference (Sylveon): cream-white body, soft pink ribbons/ears,
+   light-blue ribbon-tip/inner-ear accents, dark navy eyes. --ecnw-green
+   is the site's primary-accent slot (buttons, links, card titles, table
+   headers) and is recolored to Sylveon blue rather than staying green.
+   --ecnw-pink is retuned to Sylveon's ribbon pink. Both are picked deep
+   enough to clear WCAG AA 4.5:1 as text on the cream background AND as a
+   background behind the cream-colored text used by .btn-primary,
+   [aria-current="page"], and .table thead — see contrast ratios in the
+   verification report.
    ========================================================================= */
 
 html.ecnw-pastel {
-  --ecnw-bg: #fdf1fb;
-  --ecnw-bg-alt: #f6e4f5;
-  --ecnw-bg-raised: #efd6f0;
-  --ecnw-bg-raised-hover: #e6c3ea99;
-  --ecnw-border: #d8a6de;
-  --ecnw-border-soft: #ecd3ee;
+  --ecnw-bg: #fdf6f1;
+  --ecnw-bg-alt: #fce7ee;
+  --ecnw-bg-raised: #e3f0fa;
+  --ecnw-bg-raised-hover: #d3e6f5b3;
+  --ecnw-border: #e3aecb;
+  --ecnw-border-soft: #f3d9e6;
 
-  --ecnw-green: #1f7750;
-  --ecnw-green-dim: #1c6b48;
-  --ecnw-green-glow: rgba(31, 119, 80, 0.22);
+  --ecnw-green: #1a68a5;
+  --ecnw-green-dim: #144f7d;
+  --ecnw-green-glow: rgba(26, 104, 165, 0.22);
 
-  --ecnw-pink: #b23091;
-  --ecnw-pink-dim: #9c2c7f;
-  --ecnw-pink-glow: rgba(178, 48, 145, 0.2);
+  --ecnw-pink: #b02f79;
+  --ecnw-pink-dim: #8f2562;
+  --ecnw-pink-glow: rgba(176, 47, 121, 0.2);
 
-  --ecnw-cream: #2c1b3a;
-  --ecnw-cream-dim: #4a3358;
-  --ecnw-cream-faint: #6b5478;
+  --ecnw-cream: #1b2340;
+  --ecnw-cream-dim: #35406b;
+  --ecnw-cream-faint: #5b6690;
 
   --ecnw-warn-bg: #fde3ea;
   --ecnw-warn-border: #e8637f;
   --ecnw-warn-text: #7a1330;
 
-  --ecnw-shadow: 0 10px 30px rgba(120, 80, 140, 0.18);
+  --ecnw-shadow: 0 10px 30px rgba(90, 80, 150, 0.18);
 }
 
 /* Hardcoded (non-token) neon glows and overlays from css/styles.css that
@@ -157,12 +167,12 @@ html.ecnw-pastel {
 
 html.ecnw-pastel body {
   background-image:
-    radial-gradient(circle at 15% 0%, rgba(38, 138, 94, 0.07), transparent 45%),
-    radial-gradient(circle at 85% 20%, rgba(194, 57, 158, 0.07), transparent 45%);
+    radial-gradient(circle at 15% 0%, rgba(176, 47, 121, 0.07), transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(26, 104, 165, 0.07), transparent 45%);
 }
 
 html.ecnw-pastel .site-header {
-  background: rgba(253, 241, 251, 0.85);
+  background: rgba(253, 246, 241, 0.85);
 }
 
 html.ecnw-pastel .badge-strong {
@@ -170,11 +180,11 @@ html.ecnw-pastel .badge-strong {
 }
 
 html.ecnw-pastel .table tbody tr:hover {
-  background: rgba(194, 57, 158, 0.08);
+  background: rgba(176, 47, 121, 0.08);
 }
 
 html.ecnw-pastel .age-gate-panel {
-  box-shadow: 0 20px 60px rgba(80, 40, 90, 0.25), 0 0 0 1px rgba(38, 138, 94, 0.12);
+  box-shadow: 0 20px 60px rgba(60, 50, 90, 0.25), 0 0 0 1px rgba(26, 104, 165, 0.12);
 }
 
 @media (prefers-reduced-motion: reduce) {
