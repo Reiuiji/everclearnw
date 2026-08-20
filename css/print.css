@@ -68,6 +68,13 @@
   word-break: break-word;
 }
 
+.poster-subline {
+  font-style: italic;
+  color: var(--ecnw-cream-dim);
+  font-size: 0.9rem;
+  margin-bottom: 0.6em;
+}
+
 .poster-fineprint {
   font-size: 0.75rem;
   color: var(--ecnw-cream-faint);
@@ -149,6 +156,11 @@
   .poster-url {
     color: #000000 !important;
     font-size: 20pt;
+  }
+
+  .poster-subline {
+    color: #333333 !important;
+    font-size: 14pt;
   }
 
   .poster-fineprint {
