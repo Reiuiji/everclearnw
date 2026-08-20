@@ -103,7 +103,30 @@
     safe(updateThemeToggleButtons, "theme toggle label update");
   }
 
+  function getThemeFromQueryParam() {
+    try {
+      var raw = new URLSearchParams(window.location.search).get("mode");
+      if (!raw) return null;
+      var normalized = raw.toLowerCase();
+      return normalized === "pastel" || normalized === "night"
+        ? normalized
+        : null;
+    } catch (err) {
+      return null;
+    }
+  }
+
   function initThemeFromStorage() {
+    // A ?mode=pastel|night query param (e.g. from a QR code) wins over the
+    // stored preference and is itself persisted via setTheme, so a visitor
+    // who lands with the param keeps that theme as they navigate on to
+    // pages whose links don't carry it. Any other/missing value falls
+    // back to whatever was previously stored (default: night).
+    var fromQuery = getThemeFromQueryParam();
+    if (fromQuery) {
+      setTheme(fromQuery);
+      return;
+    }
     var stored = getStoredTheme();
     applyThemeClass(stored === "pastel" ? "pastel" : "night");
   }
