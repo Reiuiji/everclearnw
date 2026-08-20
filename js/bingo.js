@@ -11,6 +11,8 @@
   var MARKS_KEY = 'ecnw-bingo-marks';
   var FREE_INDEX = 12; // center of a 5x5 grid
   var GRID_SIZE = 25;
+  var MIN_FONT_PX = 7;
+  var MAX_FONT_PX = 22;
 
   var PHRASE_POOL = [
     'Somepony sings the show theme from memory',
@@ -65,7 +67,8 @@
     'A pony and a Pokémon trade lore for 10+ minutes',
     "Someone's fursona and ponysona are revealed to be the same guy",
     'Ribbon-count of a passing Sylveon cosplayer gets audited',
-    'Paws are declared unfit for beer pong (ruling stands)'
+    'Paws are declared unfit for beer pong (ruling stands)',
+    'Someone reports a bug on the website'
   ];
 
   var board = document.getElementById('bingo-board');
@@ -256,6 +259,74 @@
       board.appendChild(btn);
       cellButtons.push(btn);
     });
+
+    fitAllCells();
+  }
+
+  // -----------------------------------------------------------------------
+  // Per-cell font autoscaling — binary search for the largest font size (px)
+  // that keeps a cell's phrase inside its square without overflowing, since
+  // the CSS clamp() is only a pre-JS fallback.
+  // -----------------------------------------------------------------------
+  function fitCellText(btn) {
+    if (!btn || btn.clientWidth === 0) return;
+    var span = btn.querySelector('.bingo-cell-text');
+    if (!span) return;
+
+    var style = window.getComputedStyle(btn);
+    var padX = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
+    var padY = (parseFloat(style.paddingTop) || 0) + (parseFloat(style.paddingBottom) || 0);
+    var availWidth = btn.clientWidth - padX;
+    var availHeight = btn.clientHeight - padY;
+
+    function fits(size) {
+      btn.style.fontSize = size + 'px';
+      return span.scrollWidth <= availWidth && span.scrollHeight <= availHeight;
+    }
+
+    var lo = MIN_FONT_PX;
+    var hi = MAX_FONT_PX;
+    var best = MIN_FONT_PX;
+
+    if (fits(hi)) {
+      btn.style.fontSize = hi + 'px';
+      return;
+    }
+
+    fits(lo);
+
+    for (var i = 0; i < 12 && (hi - lo) > 0.5; i++) {
+      var mid = (lo + hi) / 2;
+      if (fits(mid)) {
+        best = mid;
+        lo = mid;
+      } else {
+        hi = mid;
+      }
+    }
+
+    btn.style.fontSize = Math.floor(best) + 'px';
+  }
+
+  function fitAllCells() {
+    if (board.clientWidth === 0) return;
+    cellButtons.forEach(function (btn) {
+      fitCellText(btn);
+    });
+  }
+
+  var resizeFitTimer = null;
+  window.addEventListener('resize', function () {
+    window.clearTimeout(resizeFitTimer);
+    resizeFitTimer = window.setTimeout(fitAllCells, 150);
+  });
+
+  try {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitAllCells);
+    }
+  } catch (e) {
+    /* older browsers without document.fonts — CSS clamp() fallback stands */
   }
 
   function onCellClick(e) {
