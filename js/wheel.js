@@ -9,6 +9,10 @@
 
   // ---- Segment data -------------------------------------------------
   // 10 cocktails + 1 mocktail + 1 snack + 4 water = 16 equal-weight slots.
+  // Deliberately excluded: the boozy "Sylveon Special" (½ oz Everclear +
+  // ½ oz absinthe) from the drink menu. A double-strength pour must never
+  // be a wheel-decided outcome — the wheel's strongest suggestions stay
+  // the regular ½ oz cocktails, full stop.
   var SEGMENTS = [
     {
       label: "Pinkie Punch",
@@ -53,10 +57,10 @@
       pun: "So gentle the Wheel almost didn't want to interrupt your evening."
     },
     {
-      label: "Sylveon Special 🎀 (zero-proof)",
-      short: "Sylveon 🎀",
+      label: "Foal-Friendly 🦄 (zero-proof)",
+      short: "Foal-Friendly 🦄",
       type: "mocktail",
-      pun: "Zero proof, maximum affection ribbons. The Wheel channels its inner Fairy-type for this one."
+      pun: "Zero proof, maximum affection ribbons. The Wheel salutes the Designated Sylveon."
     },
     {
       label: "Twilight Sparkler",
