@@ -114,61 +114,78 @@
 }
 
 /* =========================================================================
-   Pastel theme — Sylveon color scheme
+   Pastel theme — true pastels + dark ink
    Toggled via window.ecnwParty.setTheme("pastel" | "night"), which adds
    or removes html.ecnw-pastel. Every rule below is scoped under that
    class, so the default night theme in css/styles.css stays byte-identical
-   when the class is absent. Token overrides cover the full --ecnw-* list
-   defined in css/styles.css :root; a handful of hardcoded colors in that
-   file (site header bar, hero background glow, badge/table/age-gate
-   accents) are also overridden here so pastel mode reads as intentional
-   rather than broken, per component.
+   when the class is absent.
 
-   Palette reference (Sylveon): cream-white body, soft pink ribbons/ears,
-   light-blue ribbon-tip/inner-ear accents, dark navy eyes. --ecnw-green
-   is the site's primary-accent slot (buttons, links, card titles, table
-   headers) and is recolored to Sylveon blue rather than staying green.
-   --ecnw-pink is retuned to Sylveon's ribbon pink. Both are picked deep
-   enough to clear WCAG AA 4.5:1 as text on the cream background AND as a
-   background behind the cream-colored text used by .btn-primary,
-   [aria-current="page"], and .table thead — see contrast ratios in the
-   verification report.
+   Engineering approach: the required accents, pastel blue #A7C7E7 and
+   pastel pink #FFC5D3, are both far too light to work as text (≈1.4–1.6:1
+   on the cream background) and unreadable under cream-colored text on top
+   of them. So this is NOT "dark accents, light text on accents" like the
+   previous (Sylveon) pass — it's "pastel surfaces, dark ink on everything":
+     - --ecnw-green/--ecnw-pink stay literally #A7C7E7 / #FFC5D3 and are
+       used only as flat, unlabeled BACKGROUND fills (buttons, active-nav
+       pill, table header, bingo marked/free cells, bingo banner) — every
+       place css/styles.css (and the bingo.html / wheel.html page-specific
+       <style> blocks, which this file cannot edit but can override via
+       matching class selectors) sets `color: var(--ecnw-bg)` on top of
+       one of these is overridden below to `color: var(--ecnw-cream)`
+       (navy ink), which clears 8.7:1+.
+     - Every place --ecnw-green/--ecnw-pink is used AS TEXT (links, logo
+       accent, hero/section accents, card/result titles, tagline, badge
+       text, footer hover, focus outline, instruction headings, this
+       file's own .vibe-line) is overridden to a muted DEEP-pastel "ink"
+       derived from the same hue — dusty blue #3f6489 (5.78:1 on bg) and
+       dusty rose #a34d68 (5.14:1 on bg) — soft/desaturated rather than
+       neon, but readable.
+   Full computed contrast ratios are in the verification report.
    ========================================================================= */
 
 html.ecnw-pastel {
   --ecnw-bg: #fdf6f1;
-  --ecnw-bg-alt: #fce7ee;
-  --ecnw-bg-raised: #e3f0fa;
-  --ecnw-bg-raised-hover: #d3e6f5b3;
-  --ecnw-border: #e3aecb;
-  --ecnw-border-soft: #f3d9e6;
+  --ecnw-bg-alt: #fdedf3;
+  --ecnw-bg-raised: #eaf4fb;
+  --ecnw-bg-raised-hover: #dbe9f7b3;
+  --ecnw-border: #eec9de;
+  --ecnw-border-soft: #f8e4ee;
 
-  --ecnw-green: #1a68a5;
-  --ecnw-green-dim: #144f7d;
-  --ecnw-green-glow: rgba(26, 104, 165, 0.22);
+  --ecnw-green: #a7c7e7;
+  --ecnw-green-dim: #8fb5dd;
+  --ecnw-green-glow: rgba(167, 199, 231, 0.35);
 
-  --ecnw-pink: #b02f79;
-  --ecnw-pink-dim: #8f2562;
-  --ecnw-pink-glow: rgba(176, 47, 121, 0.2);
+  --ecnw-pink: #ffc5d3;
+  --ecnw-pink-dim: #f3a9bd;
+  --ecnw-pink-glow: rgba(255, 197, 211, 0.35);
 
   --ecnw-cream: #1b2340;
   --ecnw-cream-dim: #35406b;
   --ecnw-cream-faint: #5b6690;
 
   --ecnw-warn-bg: #fde3ea;
-  --ecnw-warn-border: #e8637f;
+  --ecnw-warn-border: #f0a8bb;
   --ecnw-warn-text: #7a1330;
 
-  --ecnw-shadow: 0 10px 30px rgba(90, 80, 150, 0.18);
+  --ecnw-shadow: 0 10px 30px rgba(150, 130, 180, 0.16);
 }
 
-/* Hardcoded (non-token) neon glows and overlays from css/styles.css that
-   need a pastel-appropriate equivalent so nothing reads as broken. */
+/* Two muted "ink" shades used only where --ecnw-green/--ecnw-pink would
+   otherwise be read as text — see the block comment above. */
+html.ecnw-pastel {
+  --ecnw-ink-blue: #3f6489;
+  --ecnw-ink-rose: #a34d68;
+}
+
+/* -------------------------------------------------------------------------
+   Hardcoded (non-token) colors from css/styles.css that need a pastel-
+   appropriate equivalent so nothing reads as broken.
+   ------------------------------------------------------------------------- */
 
 html.ecnw-pastel body {
   background-image:
-    radial-gradient(circle at 15% 0%, rgba(176, 47, 121, 0.07), transparent 45%),
-    radial-gradient(circle at 85% 20%, rgba(26, 104, 165, 0.07), transparent 45%);
+    radial-gradient(circle at 15% 0%, rgba(255, 197, 211, 0.12), transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(167, 199, 231, 0.12), transparent 45%);
 }
 
 html.ecnw-pastel .site-header {
@@ -176,15 +193,71 @@ html.ecnw-pastel .site-header {
 }
 
 html.ecnw-pastel .badge-strong {
-  box-shadow: 0 0 14px rgba(232, 99, 127, 0.2);
+  box-shadow: 0 0 14px rgba(240, 168, 187, 0.25);
 }
 
 html.ecnw-pastel .table tbody tr:hover {
-  background: rgba(176, 47, 121, 0.08);
+  background: rgba(255, 197, 211, 0.14);
 }
 
 html.ecnw-pastel .age-gate-panel {
-  box-shadow: 0 20px 60px rgba(60, 50, 90, 0.25), 0 0 0 1px rgba(26, 104, 165, 0.12);
+  box-shadow: 0 20px 60px rgba(120, 100, 140, 0.2), 0 0 0 1px rgba(167, 199, 231, 0.2);
+}
+
+/* -------------------------------------------------------------------------
+   Accent-as-TEXT overrides (dusty-blue / dusty-rose ink, ≥4.5:1 on bg).
+   Covers css/styles.css plus the page-specific <style> blocks in
+   bingo.html and wheel.html, reached here by their class names since
+   this file cannot edit those pages directly.
+   ------------------------------------------------------------------------- */
+
+html.ecnw-pastel a,
+html.ecnw-pastel .logo:hover,
+html.ecnw-pastel .logo .logo-accent,
+html.ecnw-pastel .hero-title .accent,
+html.ecnw-pastel .card-title,
+html.ecnw-pastel .badge,
+html.ecnw-pastel .site-footer a:hover,
+html.ecnw-pastel .result-title,
+html.ecnw-pastel .bingo-instructions h2,
+html.ecnw-pastel .vibe-line {
+  color: var(--ecnw-ink-blue);
+}
+
+html.ecnw-pastel :focus-visible,
+html.ecnw-pastel .wheel-disc:focus-visible {
+  outline-color: var(--ecnw-ink-blue);
+}
+
+html.ecnw-pastel a:hover,
+html.ecnw-pastel .tagline,
+html.ecnw-pastel .section-title .accent,
+html.ecnw-pastel .btn-ghost:hover {
+  color: var(--ecnw-ink-rose);
+}
+
+html.ecnw-pastel .btn-ghost:hover {
+  border-color: var(--ecnw-ink-rose);
+}
+
+/* -------------------------------------------------------------------------
+   Accent-as-BACKGROUND overrides: keep the pastel fill, swap the
+   `color: var(--ecnw-bg)` text on top for navy ink (--ecnw-cream) so it
+   stays readable against the now-light background fill.
+   ------------------------------------------------------------------------- */
+
+html.ecnw-pastel .site-nav a:hover,
+html.ecnw-pastel .site-nav a[aria-current="page"],
+html.ecnw-pastel .btn-primary,
+html.ecnw-pastel .table thead th,
+html.ecnw-pastel .bingo-cell.is-marked,
+html.ecnw-pastel .bingo-cell.is-free,
+html.ecnw-pastel .bingo-banner {
+  color: var(--ecnw-cream);
+}
+
+html.ecnw-pastel ::selection {
+  color: var(--ecnw-cream);
 }
 
 @media (prefers-reduced-motion: reduce) {
